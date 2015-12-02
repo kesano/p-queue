@@ -1,7 +1,7 @@
 /*
  * File: PQTest.cpp
  * ----------------
- * This is the starter file for the test program for Assignment #5.
+ * This is the test program for the PriorityQueue template class.
  */
 
 #include <iostream>
@@ -14,31 +14,18 @@
 using namespace std;
 
 /* Function prototypes */
-void command(string cmd, PriorityQueue & pq);
-void enqueueCommand(string cmd, PriorityQueue & pq);
-void listCommand(PriorityQueue pq);
+void command(string cmd, PriorityQueue<char> & pq);
+void enqueueCommand(string cmd, PriorityQueue<char> & pq);
+void listCommand(PriorityQueue<char> pq);
 void helpCommand();
 
 /* Main program */
 
 int main() {
-    PriorityQueue pq;
+    PriorityQueue<char> pq;
     while (true) {
         string cmd = getLine("> ");
         command(cmd, pq);
-
-        // test copying PQueues
-        /*
-        PriorityQueue pq2;
-        pq2 = pq;
-        if (!pq.isEmpty()) cout << "dequeued pq2: " << pq2.dequeue() << endl;
-        cout << pq2.size() << endl;
-        cout << "peeked pq: " << pq.peek() << endl;
-        if (!pq.isEmpty()) {
-            cout << "pq is independent" << endl;
-            cout << pq.size() << endl;
-        }
-        */
     }
     return 0;
 }
@@ -53,7 +40,7 @@ int main() {
  * queue argument by value rather than by reference.
  */
 
-void listCommand(PriorityQueue pq) {
+void listCommand(PriorityQueue<char> pq) {
     int count = pq.size();
     cout << "Queue:";
     for (int i = 0; i < count; i++) {
@@ -62,15 +49,16 @@ void listCommand(PriorityQueue pq) {
     cout << endl;
 }
 
-void enqueueCommand(string cmd, PriorityQueue & pq) {
+void enqueueCommand(string cmd, PriorityQueue<char> & pq) {
     if (string() + cmd[7] == " ") {
         int startPos = cmd.find(" ");
         int endPos = cmd.find(" ", startPos + 1);
         string value = cmd.substr(startPos + 1, endPos - startPos - 1);
+        char ch = cmd.at(cmd.find(value, cmd.find(value) - 1));
         startPos = endPos;
         if (cmd.find(" ", startPos + 1) == string::npos) {
             double priority = stringToDouble(cmd.substr(endPos + 1));
-            pq.enqueue(value, priority);
+            pq.enqueue(ch, priority);
         } else {
             cout << "Illegal enqueue format. Type \"help\" to view the correct format." << endl;
         }
@@ -79,7 +67,7 @@ void enqueueCommand(string cmd, PriorityQueue & pq) {
     }
 }
 
-void command(string cmd, PriorityQueue & pq) {
+void command(string cmd, PriorityQueue<char> & pq) {
     if (cmd == "dequeue" || cmd == "peek" || cmd == "peekPriority"
          || cmd == "list") {
         if (!pq.isEmpty()) {
@@ -109,34 +97,6 @@ void command(string cmd, PriorityQueue & pq) {
         cout << "Undefined command: " << cmd << endl;
     }
 }
-
-
-/*
-void command(string cmd, PriorityQueue & pq) {
-    if (cmd.substr(0, 7) == "enqueue") {
-        enqueueCommand(cmd, pq);
-    } else if (cmd == "dequeue") {
-        cout << pq.dequeue() << endl;
-    } else if (cmd == "peek") {
-        cout << pq.peek() << endl;
-    } else if (cmd == "peekPriority") {
-        cout << pq.peekPriority() << endl;
-    } else if (cmd == "clear") {
-        pq.clear();
-    } else if (cmd == "size") {
-        cout << pq.size() << endl;
-    } else if (cmd == "isEmpty") {
-        cout << ((pq.isEmpty()) ? "true" : "false") << endl;
-    } else if (cmd == "list") {
-        listCommand(pq);
-    } else if (cmd == "help") {
-        helpCommand();
-    } else {
-        cout << "Undefined command: " << cmd << endl;
-    }
-}
-*/
-
 
 /*
  * Function: helpCommand
