@@ -7,6 +7,8 @@
  * commands.
  */
 
+#ifdef _pqueue_h
+
 #include <iostream>
 #include <string>
 #include "error.h"
@@ -20,7 +22,8 @@ using namespace std;
  * default values.
  */
 
-PriorityQueue::PriorityQueue() {
+template <typename ValueType>
+PriorityQueue<ValueType>::PriorityQueue() {
     capacity = INITIAL_CAPACITY;
     array = new ValuePriorityPair[capacity];
     head = tail = 0;
@@ -33,19 +36,23 @@ PriorityQueue::PriorityQueue() {
  * the dynamic array of elements.
  */
 
-PriorityQueue::~PriorityQueue() {
+template <typename ValueType>
+PriorityQueue<ValueType>::~PriorityQueue() {
     delete[] array;
 }
 
-int PriorityQueue::size() const {
+template <typename ValueType>
+int PriorityQueue<ValueType>::size() const {
     return (tail + capacity - head) % capacity;
 }
 
-bool PriorityQueue::isEmpty() {
+template <typename ValueType>
+bool PriorityQueue<ValueType>::isEmpty() {
     return head == tail;
 }
 
-void PriorityQueue::clear() {
+template <typename ValueType>
+void PriorityQueue<ValueType>::clear() {
     head = tail = 0;
 }
 
@@ -61,7 +68,8 @@ void PriorityQueue::clear() {
  * the size is one less than the capacity.
  */
 
-void PriorityQueue::enqueue(string value, double priority) {
+template <typename ValueType>
+void PriorityQueue<ValueType>::enqueue(ValueType value, double priority) {
     if (size() == capacity - 1) expandCapacity();
     ValuePriorityPair p;
     p.value = value;
@@ -98,19 +106,22 @@ void PriorityQueue::enqueue(string value, double priority) {
  * runs in constant time.
  */
 
-string PriorityQueue::dequeue() {
+template <typename ValueType>
+ValueType PriorityQueue<ValueType>::dequeue() {
     if (isEmpty()) error("dequeue: Attempting to dequeue an empty priority queue");
-    string value = array[head].value;
+    ValueType value = array[head].value;
     head = (head + 1) % capacity;
     return value;
 }
 
-string PriorityQueue::peek() {
+template <typename ValueType>
+ValueType PriorityQueue<ValueType>::peek() {
     if (isEmpty()) error("peek: Attempting to peek an empty priority queue");
     return array[head].value;
 }
 
-double PriorityQueue::peekPriority() {
+template <typename ValueType>
+double PriorityQueue<ValueType>::peekPriority() {
     if (isEmpty()) error("peekPriority: Attempting to peek an empty priority queue");
     return array[head].priority;
 }
@@ -121,7 +132,8 @@ double PriorityQueue::peekPriority() {
  * Initializes the current object to be a deep copy of the argument.
  */
 
-PriorityQueue::PriorityQueue(const PriorityQueue & src) {
+template <typename ValueType>
+PriorityQueue<ValueType>::PriorityQueue(const PriorityQueue & src) {
     deepCopy(src);
 }
 
@@ -134,7 +146,8 @@ PriorityQueue::PriorityQueue(const PriorityQueue & src) {
  * making a deep copy that includes the dynamic array.
  */
 
-PriorityQueue & PriorityQueue::operator=(const PriorityQueue & src) {
+template <typename ValueType>
+PriorityQueue<ValueType> & PriorityQueue<ValueType>::operator=(const PriorityQueue & src) {
     if (this != &src) {
         if (array != NULL) delete[] array;
         deepCopy(src);
@@ -152,7 +165,8 @@ PriorityQueue & PriorityQueue::operator=(const PriorityQueue & src) {
  * use.
  */
 
-void PriorityQueue::expandCapacity() {
+template <typename ValueType>
+void PriorityQueue<ValueType>::expandCapacity() {
     int count = size();
     capacity *= 2;
     ValuePriorityPair *oldArray = array;
@@ -172,7 +186,8 @@ void PriorityQueue::expandCapacity() {
  * into the current object, including the values in the dynamic array.
  */
 
-void PriorityQueue::deepCopy(const PriorityQueue & src) {
+template <typename ValueType>
+void PriorityQueue<ValueType>::deepCopy(const PriorityQueue & src) {
     int count = src.size();
     head = src.head;
     tail = src.tail;
@@ -185,3 +200,5 @@ void PriorityQueue::deepCopy(const PriorityQueue & src) {
     head = 0;
     tail = count;
 }
+
+#endif

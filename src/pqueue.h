@@ -13,8 +13,8 @@
 #include "error.h"
 
 /*
- * Class: PriorityQueue
- * -----------------------
+ * Class: PriorityQueue<ValueType>
+ * -------------------------------
  * This class models a structure called a priority queue in which
  * values are processed in order of priority.  As in conventional
  * English usage, lower priority numbers correspond to higher effective
@@ -22,14 +22,15 @@
  * priority 2 item.
  */
 
+template <typename ValueType>
 class PriorityQueue {
 
 public:
 
 /*
  * Constructor: PriorityQueue
- * Usage: PriorityQueue pq;
- * ---------------------------
+ * Usage: PriorityQueue<ValueType> pq;
+ * -----------------------------------
  * Initializes a new priority queue, which is initially empty.
  */
 
@@ -80,28 +81,28 @@ public:
  * If not specified, the priority is set to 1.
  */
 
-    void enqueue(std::string value, double priority = 1);
+    void enqueue(ValueType value, double priority = 1);
 
 /*
  * Method: dequeue
- * Usage: std::string first = pq.dequeue();
- * ------------------------------
+ * Usage: ValueType first = pq.dequeue();
+ * --------------------------------------
  * Removes and returns the highest priority value.  If multiple
  * entries in the queue have the same priority, those values are
  * dequeued in the same order in which they were enqueued.
  */
 
-    std::string dequeue();
+    ValueType dequeue();
 
 /*
  * Method: peek
- * Usage: std::string first = pq.peek();
- * ---------------------------
+ * Usage: ValueType first = pq.peek();
+ * -----------------------------------
  * Returns the value of highest priority in the queue, without
  * removing it.
  */
 
-    std::string peek();
+    ValueType peek();
 
 /*
  * Method: peekPriority
@@ -134,5 +135,7 @@ public:
 #include "pqueuepriv.h"
 
 };
+
+#include "pqueue.cpp"
 
 #endif
