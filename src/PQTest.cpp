@@ -1,7 +1,7 @@
 /*
  * File: PQTest.cpp
  * ----------------
- * This is the starter file for the test program for Assignment #5.
+ * This is the test program for the PriorityQueue class that stores strings.
  */
 
 #include <iostream>
@@ -26,19 +26,6 @@ int main() {
     while (true) {
         string cmd = getLine("> ");
         command(cmd, pq);
-
-        // test copying PQueues
-        /*
-        PriorityQueue pq2;
-        pq2 = pq;
-        if (!pq.isEmpty()) cout << "dequeued pq2: " << pq2.dequeue() << endl;
-        cout << pq2.size() << endl;
-        cout << "peeked pq: " << pq.peek() << endl;
-        if (!pq.isEmpty()) {
-            cout << "pq is independent" << endl;
-            cout << pq.size() << endl;
-        }
-        */
     }
     return 0;
 }
@@ -109,34 +96,6 @@ void command(string cmd, PriorityQueue & pq) {
         cout << "Undefined command: " << cmd << endl;
     }
 }
-
-
-/*
-void command(string cmd, PriorityQueue & pq) {
-    if (cmd.substr(0, 7) == "enqueue") {
-        enqueueCommand(cmd, pq);
-    } else if (cmd == "dequeue") {
-        cout << pq.dequeue() << endl;
-    } else if (cmd == "peek") {
-        cout << pq.peek() << endl;
-    } else if (cmd == "peekPriority") {
-        cout << pq.peekPriority() << endl;
-    } else if (cmd == "clear") {
-        pq.clear();
-    } else if (cmd == "size") {
-        cout << pq.size() << endl;
-    } else if (cmd == "isEmpty") {
-        cout << ((pq.isEmpty()) ? "true" : "false") << endl;
-    } else if (cmd == "list") {
-        listCommand(pq);
-    } else if (cmd == "help") {
-        helpCommand();
-    } else {
-        cout << "Undefined command: " << cmd << endl;
-    }
-}
-*/
-
 
 /*
  * Function: helpCommand
