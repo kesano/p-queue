@@ -60,7 +60,7 @@ public:
  * Returns true if the priority queue contains no elements.
  */
 
-    bool isEmpty();
+    bool isEmpty() const;
 
 /*
  * Method: clear
@@ -102,7 +102,7 @@ public:
  * removing it.
  */
 
-    ValueType peek();
+    ValueType peek() const;
 
 /*
  * Method: peekPriority
@@ -112,7 +112,7 @@ public:
  * removing it.
  */
 
-    double peekPriority();
+    double peekPriority() const;
 
 /*
  * Method: copy constructor

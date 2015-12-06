@@ -47,7 +47,7 @@ int PriorityQueue<ValueType>::size() const {
 }
 
 template <typename ValueType>
-bool PriorityQueue<ValueType>::isEmpty() {
+bool PriorityQueue<ValueType>::isEmpty() const {
     return head == tail;
 }
 
@@ -115,13 +115,13 @@ ValueType PriorityQueue<ValueType>::dequeue() {
 }
 
 template <typename ValueType>
-ValueType PriorityQueue<ValueType>::peek() {
+ValueType PriorityQueue<ValueType>::peek() const {
     if (isEmpty()) error("peek: Attempting to peek an empty priority queue");
     return array[head].value;
 }
 
 template <typename ValueType>
-double PriorityQueue<ValueType>::peekPriority() {
+double PriorityQueue<ValueType>::peekPriority() const {
     if (isEmpty()) error("peekPriority: Attempting to peek an empty priority queue");
     return array[head].priority;
 }
