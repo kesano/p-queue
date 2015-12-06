@@ -49,6 +49,14 @@ void listCommand(PriorityQueue<char> pq) {
     cout << endl;
 }
 
+/*
+ * Function: enqueueCommand
+ * Usage: void enqueueCommand(cmd, pq);
+ * ------------------------------------
+ * Adds the value of the given command to the priority queue. If the format
+ * of command is incorrect, an error message is displayed.
+ */
+
 void enqueueCommand(string cmd, PriorityQueue<char> & pq) {
     if (string() + cmd[7] == " ") {
         int startPos = cmd.find(" ");
@@ -66,6 +74,14 @@ void enqueueCommand(string cmd, PriorityQueue<char> & pq) {
         cout << "Illegal enqueue format. Type \"help\" to view the correct format." << endl;
     }
 }
+
+/*
+ * Function: command
+ * Usage: void command(cmd, pq);
+ * -----------------------------
+ * Performs the specified command on the given priority queue. If the format
+ * of command is incorrect, an error message is displayed.
+ */
 
 void command(string cmd, PriorityQueue<char> & pq) {
     if (cmd == "dequeue" || cmd == "peek" || cmd == "peekPriority"
